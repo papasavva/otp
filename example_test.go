@@ -3,6 +3,7 @@ package otp_test
 import (
 	"encoding/base32"
 	"fmt"
+	"strings"
 
 	"github.com/pquerna/otp"
 	"github.com/pquerna/otp/totp"
@@ -33,8 +34,8 @@ func ExampleNewKeyFromURL() {
 
 func ExampleKey_Secret() {
 	// Reload the Base32 secret saved from key.Secret() during enrollment.
-	storedSecret := "NBSWY3DPEB3W64TMMQ"
-	secret, err := base32.StdEncoding.WithPadding(base32.NoPadding).DecodeString(storedSecret)
+	storedSecret := "nbswy3dpeb3w64tmmq"
+	secret, err := base32.StdEncoding.WithPadding(base32.NoPadding).DecodeString(strings.ToUpper(storedSecret))
 	if err != nil {
 		panic(err)
 	}

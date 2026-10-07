@@ -46,7 +46,7 @@ The restored key retains the secret, issuer, account name, period, digits, and a
 If you stored only `key.Secret()`, decode it before passing it to `totp.Generate`. `key.Secret()` returns a Base32-encoded string, while `GenerateOpts.Secret` expects the raw bytes. Passing `[]byte(storedSecret)` encodes the string again and produces a different secret.
 
 ```go
-secret, err := base32.StdEncoding.WithPadding(base32.NoPadding).DecodeString(storedSecret)
+secret, err := base32.StdEncoding.WithPadding(base32.NoPadding).DecodeString(strings.ToUpper(storedSecret))
 if err != nil {
 	panic(err)
 }
@@ -63,7 +63,7 @@ if err != nil {
 }
 ```
 
-Use the same issuer, account name, period, digits, and algorithm as during enrollment; these are not included in the secret. Import `encoding/base32` for the decoding step. Neither restoration method generates a new secret.
+Use the same issuer, account name, period, digits, and algorithm as during enrollment; these are not included in the secret. Import `encoding/base32` and `strings` for the decoding step. Neither restoration method generates a new secret.
 
 ### Code Generation
 
